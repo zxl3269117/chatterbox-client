@@ -13,11 +13,13 @@ var App = {
 
     FormView.initialize();
     RoomsView.initialize();
-    MessagesView.initialize();
+
 
     // Fetch initial batch of messages
     App.startSpinner();
     App.fetch(App.stopSpinner);
+
+    MessagesView.initialize();
 
     // TODO: Make sure the app loads data from the API
     // continually, instead of just once at the start.
@@ -31,6 +33,8 @@ var App = {
 
       // TODO: Use the data to update Messages and Rooms
       // and re-render the corresponding views.
+      Messages._data = data;
+      // console.log('within app.js', Messages._data);
     });
   },
 

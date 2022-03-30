@@ -8,19 +8,24 @@ var MessagesView = {
   initialize: function() {
     // TODO: Perform any work which needs to be done
     // when this view loads.
+    MessagesView.render();
   },
 
   // Render _all_ the messages.
   render: function() {
 
-    var successCallBack = function(data) {
-      _.each(data, function(element) {
-        MessagesView.renderMessage(element);
-      });
-    };
+    _.each(Messages.retrieve(), function(element) {
+      console.log('element', element);
+      MessagesView.renderMessage(element);
+    });
+    // var successCallBack = function(data) {
+    //   _.each(data, function(element) {
+    //     MessagesView.renderMessage(element);
+    //   });
+    // };
 
+    // App.fetch(successCallBack);
 
-    Parse.readAll(successCallBack);
   },
 
   // Render a single message.

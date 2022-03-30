@@ -8,6 +8,7 @@ var FormView = {
 
   initialize: function() {
     FormView.$form.on('submit', FormView.handleSubmit);
+    FormView.$form.on('input', FormView.setStatus(false));
   },
 
   handleSubmit: function(event) {
@@ -16,12 +17,13 @@ var FormView = {
 
     // TODO: Currently, this is all handleSubmit does.
     // Make this function actually send a message to the Parse API.
-  
+
     console.log('click!');
   },
 
   setStatus: function(active) {
-    var status = active ? 'true' : null;
+    var status = active ? 'true' : 'false';
+    console.log(status);
     FormView.$form.find('input[type=submit]').attr('disabled', status);
   }
 
