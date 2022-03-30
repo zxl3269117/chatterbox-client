@@ -10,12 +10,27 @@ var MessagesView = {
     // when this view loads.
   },
 
+  // Render _all_ the messages.
   render: function() {
-    // TODO: Render _all_ the messages.
+
+    var successCallBack = function(data) {
+      _.each(data, function(element) {
+        MessagesView.renderMessage(element);
+      });
+    };
+
+
+    Parse.readAll(successCallBack);
   },
 
+  // Render a single message.
   renderMessage: function(message) {
-    // TODO: Render a single message.
+
+    message.text = _.escape(message.text);
+    message.username = _.escape(message.username);
+
+    var renderedMessage = MessageView.render(message);
+    $(renderedMessage).appendTo(MessagesView.$chats);
   },
 
   handleClick: function(event) {
