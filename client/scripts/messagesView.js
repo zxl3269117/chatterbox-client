@@ -13,19 +13,9 @@ var MessagesView = {
 
   // Render _all_ the messages.
   render: function() {
-
     _.each(Messages.retrieve(), function(element) {
-      console.log('element', element);
       MessagesView.renderMessage(element);
     });
-    // var successCallBack = function(data) {
-    //   _.each(data, function(element) {
-    //     MessagesView.renderMessage(element);
-    //   });
-    // };
-
-    // App.fetch(successCallBack);
-
   },
 
   // Render a single message.

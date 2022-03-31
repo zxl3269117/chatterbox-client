@@ -23,7 +23,7 @@ var App = {
 
     // TODO: Make sure the app loads data from the API
     // continually, instead of just once at the start.
-    MessagesView.render();
+    // MessagesView.render();
   },
 
   fetch: function(callback = ()=>{}) {
@@ -33,8 +33,11 @@ var App = {
 
       // TODO: Use the data to update Messages and Rooms
       // and re-render the corresponding views.
-      Messages._data = data;
-      // console.log('within app.js', Messages._data);
+      _.each(data, function(element) {
+        Messages.add(element);
+      });
+      MessagesView.render();
+      callback();
     });
   },
 

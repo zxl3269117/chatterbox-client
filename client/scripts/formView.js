@@ -8,23 +8,33 @@ var FormView = {
 
   initialize: function() {
     FormView.$form.on('submit', FormView.handleSubmit);
-    FormView.$form.on('input', FormView.setStatus(false));
   },
 
   handleSubmit: function(event) {
     // Stop the browser from submitting the form
     event.preventDefault();
-
     // TODO: Currently, this is all handleSubmit does.
     // Make this function actually send a message to the Parse API.
+    var inputMessage = event.currentTarget[0].value;
 
+    var newMessage = {
+      username: App.username,
+      text: inputMessage,
+      roomname: 'lobby'
+    };
+    Parse.create(newMessage, function() { console.log('Message sent (:'); });
+    // App.fetch(function() { console.log('callback ?'); });
+    // window.location.reload();
+    history.go(0);
     console.log('click!');
   },
 
   setStatus: function(active) {
-    var status = active ? 'true' : 'false';
-    console.log(status);
+    var status = active ? 'true' : null;
     FormView.$form.find('input[type=submit]').attr('disabled', status);
   }
 
 };
+
+// $('form #message').val() => return the value from the input box
+// $( "select#foo option:checked" ).val();
