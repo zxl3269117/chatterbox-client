@@ -34,8 +34,10 @@ var App = {
       // and re-render the corresponding views.
       _.each(data, function(element) {
         Messages.add(element);
+        Rooms.addMessageToRooms(element);
       });
       MessagesView.render();
+      RoomsView.render();
       callback();
     });
   },
