@@ -23,7 +23,6 @@ var App = {
 
     // TODO: Make sure the app loads data from the API
     // continually, instead of just once at the start.
-    // MessagesView.render();
   },
 
   fetch: function(callback = ()=>{}) {

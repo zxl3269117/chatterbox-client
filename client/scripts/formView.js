@@ -23,9 +23,10 @@ var FormView = {
       roomname: 'lobby'
     };
     Parse.create(newMessage, function() { console.log('Message sent (:'); });
-    // App.fetch(function() { console.log('callback ?'); });
-    // window.location.reload();
-    history.go(0);
+    App.fetch(function() {
+      window.location.reload();
+      console.log('callback ?');
+    });
     console.log('click!');
   },
 

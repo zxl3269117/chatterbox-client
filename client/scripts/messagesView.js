@@ -8,7 +8,6 @@ var MessagesView = {
   initialize: function() {
     // TODO: Perform any work which needs to be done
     // when this view loads.
-    MessagesView.render();
   },
 
   // Render _all_ the messages.
