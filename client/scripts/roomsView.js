@@ -7,25 +7,25 @@ var RoomsView = {
   $select: $('#rooms select'),
 
   initialize: function() {
-    // TODO: Perform any work which needs to be done
-    // when this view loads.
     RoomsView.$button.on('click', RoomsView.handleClick);
     RoomsView.$select.on('change', RoomsView.handleChange);
   },
 
-  render: function() {
-    //Render out the list of rooms.
+  //Render out the list of rooms.
+  render: function(defaultRoom = 'all rooms') {
+    RoomsView.$select.empty();
     var allRooms = Rooms.retrieveRoomNames();
 
     _.each(allRooms, function(currentRoom) {
-      RoomsView.renderRoom(currentRoom);
+      RoomsView.renderRoom(currentRoom, defaultRoom);
     });
   },
 
-  renderRoom: function(roomname) {
-    // Render out a single room.
+  // Render out a single room.
+  renderRoom: function(roomname, defaultRoom = 'all rooms') {
+
     var domString = '';
-    if (roomname === 'all rooms') {
+    if (roomname === defaultRoom) {
       domString = `<option value=${roomname} selected>${roomname}</option>`;
     } else {
       domString = `<option value=${roomname}>${roomname}</option>`;
@@ -33,18 +33,23 @@ var RoomsView = {
     $(domString).appendTo('#rooms select');
   },
 
+  // Handle a user selecting a different room.
   handleChange: function(event) {
-    // TODO: Handle a user selecting a different room.
     var selected = RoomsView.$select.find(':selected').text();
     MessagesView.render(selected);
   },
 
   handleClick: function(event) {
     // TODO: Handle the user clicking the "Add Room" button.
-    // preven default
-    $('#addRoomTextBox').val();
-    console.log($('#addRoomTextBox').val());
-
+    var newRoom = $('#addRoomTextBox').val();
+    // add the room to the room list
+    Rooms.addRoom(newRoom);
+    // rerender the room list
+    RoomsView.render(newRoom);
+    // render the message in the new room
+    MessagesView.render(newRoom);
+    // clear the input box
+    $('#addRoomTextBox').val('');
   }
 
 };

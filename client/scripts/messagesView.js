@@ -10,24 +10,16 @@ var MessagesView = {
     // when this view loads.
   },
 
-  // Render _all_ the messages.
-  render: function(selectedRoom) {
+  // Render ALL messages OR messages in selected room
+  render: function(selectedRoom = 'all rooms') {
     MessagesView.$chats.empty();
-    if (!arguments[0]) {
-      _.each(Messages.retrieve(), function(element) {
-        MessagesView.renderMessage(element);
-      });
-
-    } else {
-      _.each(Rooms.retrieveMessagesFromRoom(selectedRoom), function(element) {
-        MessagesView.renderMessage(element);
-      });
-    }
+    _.each(Messages.retrieveMessagesFromRoom(selectedRoom), function(eachMessage) {
+      MessagesView.renderMessage(eachMessage);
+    });
   },
 
   // Render a single message.
   renderMessage: function(message) {
-
     message.text = _.escape(message.text);
     message.username = _.escape(message.username);
 

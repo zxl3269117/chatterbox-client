@@ -22,14 +22,16 @@ var FormView = {
       text: inputMessage,
       roomname: $('#rooms select').find(':selected').text()
     };
-    Parse.create(newMessage, function() {
 
+    // send a POST request to server to update the server data
+    Parse.create(newMessage, function() {
+      // in the success CB send another get request to update local data
       Parse.readAll(function (data) {
         Messages.clear();
         Rooms.clear();
         _.each(data, function(element) {
-          Messages.add(element);
-          Rooms.addMessageToRooms(element);
+          Messages.addMessageToRooms(element);
+          Rooms.addRoom(element.roomname);
         });
         MessagesView.render(newMessage['roomname']);
       });
@@ -37,6 +39,7 @@ var FormView = {
     });
     console.log('click!');
 
+    $('#message').val('');
   },
 
   setStatus: function(active) {
@@ -45,6 +48,3 @@ var FormView = {
   }
 
 };
-
-// $('form #message').val() => return the value from the input bo;x
-// $( "select#foo option:checked" ).val();

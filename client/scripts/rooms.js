@@ -4,45 +4,28 @@
 
 var Rooms = {
 
-  // TODO: Define how you want to store the list of rooms
-  _data: {'all rooms': []},
+  _data: ['all rooms'],
 
-  // TODO: Define methods which allow you to add rooms, update the list,
-  // mark a room as selected, etc.
-
-  addMessageToRooms: function(message) {
-    // if the roomname is null or empty string, message only existing
-    if (!message.roomname || message.roomname.toLowerCase() === 'null') {
-      Rooms._data['all rooms'].push(message);
-      return;
+  // add a room name
+  addRoom: function(roomname) {
+    if (roomname && !Rooms._data.includes(roomname)) {
+      Rooms._data.push(roomname);
     }
-
-    var roomName = message.roomname.toLowerCase();
-
-    // put message in the corresponding rooms
-    if (Rooms._data[roomName]) {
-      Rooms._data[roomName].push(message);
-    } else {
-      Rooms._data[roomName] = [message];
-    }
-
-    // push all other messages in all rooms
-    Rooms._data['all rooms'].push(message);
   },
 
-  // return all the room names available
+  // return all room names
   retrieveRoomNames: function() {
-    return Object.keys(Rooms._data);
+    return Rooms._data;
   },
 
+  // return messages belong to the selected room
   retrieveMessagesFromRoom: function(selectedRoom) {
     return Rooms._data[selectedRoom];
   },
 
   clear: () => {
-    Rooms._data = {'all rooms': []};
+    Rooms._data = ['all rooms'];
   }
-
 };
 
 

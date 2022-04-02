@@ -33,8 +33,8 @@ var App = {
       // TODO: Use the data to update Messages and Rooms
       // and re-render the corresponding views.
       _.each(data, function(element) {
-        Messages.add(element);
-        Rooms.addMessageToRooms(element);
+        Messages.addMessageToRooms(element);
+        Rooms.addRoom(element.roomname);
       });
       MessagesView.render();
       RoomsView.render();
