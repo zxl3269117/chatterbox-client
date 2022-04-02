@@ -20,15 +20,23 @@ var FormView = {
     var newMessage = {
       username: App.username,
       text: inputMessage,
-      roomname: 'lobby'
+      roomname: $('#rooms select').find(':selected').text()
     };
     Parse.create(newMessage, function() {
-      App.fetch(function() {
-        window.location.reload();
+
+      Parse.readAll(function (data) {
+        Messages.clear();
+        Rooms.clear();
+        _.each(data, function(element) {
+          Messages.add(element);
+          Rooms.addMessageToRooms(element);
+        });
+        MessagesView.render(newMessage['roomname']);
       });
       console.log('Message sent (:');
     });
     console.log('click!');
+
   },
 
   setStatus: function(active) {
@@ -38,5 +46,5 @@ var FormView = {
 
 };
 
-// $('form #message').val() => return the value from the input box
+// $('form #message').val() => return the value from the input bo;x
 // $( "select#foo option:checked" ).val();

@@ -11,10 +11,18 @@ var MessagesView = {
   },
 
   // Render _all_ the messages.
-  render: function() {
-    _.each(Messages.retrieve(), function(element) {
-      MessagesView.renderMessage(element);
-    });
+  render: function(selectedRoom) {
+    MessagesView.$chats.empty();
+    if (!arguments[0]) {
+      _.each(Messages.retrieve(), function(element) {
+        MessagesView.renderMessage(element);
+      });
+
+    } else {
+      _.each(Rooms.retrieveMessagesFromRoom(selectedRoom), function(element) {
+        MessagesView.renderMessage(element);
+      });
+    }
   },
 
   // Render a single message.

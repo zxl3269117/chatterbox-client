@@ -15,5 +15,9 @@ var Messages = {
 
   add: (message) => {
     Messages._data.push(message);
+  },
+
+  clear: () => {
+    Messages._data = [];
   }
 };

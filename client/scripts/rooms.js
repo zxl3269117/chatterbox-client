@@ -35,7 +35,13 @@ var Rooms = {
     return Object.keys(Rooms._data);
   },
 
-  retrieveMessagesFromRoom: function() {}
+  retrieveMessagesFromRoom: function(selectedRoom) {
+    return Rooms._data[selectedRoom];
+  },
+
+  clear: () => {
+    Rooms._data = {'all rooms': []};
+  }
 
 };
 

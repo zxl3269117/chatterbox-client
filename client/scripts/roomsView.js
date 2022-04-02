@@ -35,15 +35,16 @@ var RoomsView = {
 
   handleChange: function(event) {
     // TODO: Handle a user selecting a different room.
-    /*
-      - get which room is selected when event triggered
-      - retieve messages that have same roomname (retrieveMessagesFromRoom method)
-      - refresh page with only messages from matching room
-     */
+    var selected = RoomsView.$select.find(':selected').text();
+    MessagesView.render(selected);
   },
 
   handleClick: function(event) {
     // TODO: Handle the user clicking the "Add Room" button.
+    // preven default
+    $('#addRoomTextBox').val();
+    console.log($('#addRoomTextBox').val());
+
   }
 
 };
