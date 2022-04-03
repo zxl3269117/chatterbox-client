@@ -39,17 +39,12 @@ var RoomsView = {
     MessagesView.render(selected);
   },
 
+  // Handle the user clicking the "Add Room" button.
   handleClick: function(event) {
-    // TODO: Handle the user clicking the "Add Room" button.
-    var newRoom = $('#addRoomTextBox').val();
-    // add the room to the room list
+    var newRoom = prompt('What room?') || 'all rooms';
     Rooms.addRoom(newRoom);
-    // rerender the room list
     RoomsView.render(newRoom);
-    // render the message in the new room
     MessagesView.render(newRoom);
-    // clear the input box
-    $('#addRoomTextBox').val('');
   }
 
 };

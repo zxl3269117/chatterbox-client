@@ -35,9 +35,9 @@ var FormView = {
         });
         MessagesView.render(newMessage['roomname']);
       });
-      console.log('Message sent (:');
+      // console.log('Message sent (:');
     });
-    console.log('click!');
+    // console.log('click!');
 
     $('#message').val('');
   },
